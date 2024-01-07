@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">PAM</string>
+    <string name="Button1">Lanjut</string>
+    <string name="no_meja">Nomor Meja</string>
+    <string name="nama_pel">Nama Pelanggan</string>
+    <string name="Menu">Menu</string>
+    <string name="cancel">Cancel</string>
+    <string name="bayar">Bayar</string>
+    <string name="pesanan">Pesanan</string>
+    <string name="jumlah">Jumlah</string>
+    <string name="Sub_total">SubTotal</string>
+    <string name="Next">Next</string>
+
+
 </resources>

@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.pam"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.pam"
@@ -66,4 +66,8 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Navigation Compose
+    implementation("androidx.navigation:navigation-compose:2.4.0-beta02")
 }
+
