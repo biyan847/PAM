@@ -3,15 +3,13 @@ package com.example.pam
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.example.pam.Navigation.SetupNavGraph
+import com.example.pam.Navigation.PengelolaHalaman
+
 import com.example.pam.ui.theme.PAMTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,8 +17,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PAMTheme {
-                val navController = rememberNavController()
-                SetupNavGraph(navController = navController)
+                PengelolaHalaman()
             }
         }
     }
@@ -38,7 +35,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     PAMTheme {
-        val navController = rememberNavController()
-        SetupNavGraph(navController = navController)
+        PengelolaHalaman()
     }
 }

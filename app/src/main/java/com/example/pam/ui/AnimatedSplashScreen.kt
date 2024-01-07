@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import com.example.pam.Navigation.Screen
 import com.example.pam.R
+import com.example.pam.ui.add.DestinasiEntry
 import com.example.pam.ui.theme.Purple80
 import kotlinx.coroutines.delay
 
@@ -38,7 +39,7 @@ fun AnimatedSplashScreen(navController: NavHostController) {
         startAnimation = true
         delay(4000)
         navController.popBackStack()
-        navController.navigate(Screen.Home.route)
+        navController.navigate(DestinasiEntry.route)
     }
     Splash(alpha = alphaAnim.value)
 }
