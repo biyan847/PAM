@@ -12,7 +12,7 @@ data class AddEvent(
     val password: String = "",
 )
 
-fun AddEvent.toAdmin() = Admin(
+fun AddEvent.toAdmin(): Admin = Admin(
     id = id,
     nama = nama,
     password = password

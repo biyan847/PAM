@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "79665725378",
+    "project_id": "pam1-ad27c",
+    "storage_bucket": "pam1-ad27c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79665725378:android:fb9c7638fac6a9ffc6605b",
+        "android_client_info": {
+          "package_name": "com.example.pam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxn1JtyIqfsyf0y9TpRKkctKehrdWdVBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

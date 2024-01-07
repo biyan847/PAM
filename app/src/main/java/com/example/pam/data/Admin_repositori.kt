@@ -47,15 +47,15 @@ class AdminRepositoryImpl(private val firestore: FirebaseFirestore) : AdminRepos
         firestore.collection("Admin").document(admin.id).set(admin).await()
     }
 
-    override suspend fun delete(AdminId: String) {
-        firestore.collection("Admin").document(AdminId).delete().await()
+    override suspend fun delete(adminId: String) {
+        firestore.collection("Admin").document(adminId).delete().await()
     }
 
-    override fun getAdminById(AdminId: String): Flow<Admin> {
+    override fun getAdminById(adminId: String): Flow<Admin> {
         return flow {
-            val snapshot = firestore.collection("Admin").document(AdminId).get().await()
-            val Admin = snapshot.toObject(Admin::class.java)
-            emit(Admin!!)
+            val snapshot = firestore.collection("Admin").document(adminId).get().await()
+            val admin = snapshot.toObject(Admin::class.java)
+            emit(admin!!)
         }.flowOn(Dispatchers.IO)
     }
 

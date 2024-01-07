@@ -13,7 +13,6 @@ fun CreationExtras.apkikasiAdmin(): AdminAplication =
 
 object PenyediaViewModel {
     val Factory = viewModelFactory {
-
         initializer {
             AddViewModel(apkikasiAdmin().container.adminRepository)
         }
