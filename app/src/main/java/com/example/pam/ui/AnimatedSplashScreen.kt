@@ -1,5 +1,6 @@
 package com.example.pam.ui
 
+import LoginPage
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -39,7 +40,7 @@ fun AnimatedSplashScreen(navController: NavHostController) {
         startAnimation = true
         delay(4000)
         navController.popBackStack()
-        navController.navigate(DestinasiEntry.route)
+        navController.navigate("LoginPage")
     }
     Splash(alpha = alphaAnim.value)
 }
