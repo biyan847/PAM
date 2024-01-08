@@ -47,6 +47,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.pam.R
+import com.example.pam.ui.HalamaHome
 import com.example.pam.ui.add.DestinasiEntry
 import com.example.pam.ui.theme.PAMTheme
 import com.google.firebase.Firebase
@@ -167,4 +168,12 @@ fun LoginPage(
         }
     }
 
+}
+@Preview
+@Composable
+fun LoginPagePreview() {
+    val navController = rememberNavController()
+    PAMTheme {
+        LoginPage(navController = navController)
+    }
 }
