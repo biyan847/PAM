@@ -40,7 +40,7 @@ fun AdminApp(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterTopAppBar(
+fun AddMenuTopAppBar(
     title: String,
     canNavigateBack: Boolean,
     modifier: Modifier = Modifier,

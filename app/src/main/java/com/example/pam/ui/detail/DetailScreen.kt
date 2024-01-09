@@ -32,19 +32,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.pam.Model.Admin
+import com.example.pam.Model.Makanan
 import com.example.pam.Navigation.DestinasiNavigasi
 import com.example.pam.ui.DetailUIState
 import com.example.pam.ui.PenyediaViewModel
-import com.example.pam.ui.RegisterTopAppBar
+import com.example.pam.ui.AddMenuTopAppBar
 import com.example.pam.ui.toAdmin
 import kotlinx.coroutines.launch
 
 object DetailDestination : DestinasiNavigasi {
     override val route = "item_details"
     override val titleRes = "Detail Admin"
-    const val AdminId = "itemId"
-    val routeWithArgs = "$route/{$AdminId}"
+    const val MakananId = "itemId"
+    val routeWithArgs = "$route/{$MakananId}"
 }
 
 
@@ -60,7 +60,7 @@ fun DetailScreen(
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
         topBar = {
-            RegisterTopAppBar(
+            AddMenuTopAppBar(
                 title = DetailDestination.titleRes,
                 canNavigateBack = true,
                 navigateUp = navigateBack
@@ -111,7 +111,7 @@ private fun ItemDetailsBody(
     ) {
         var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
         ItemDetails(
-            admin  = detailUIState.addEvent.toAdmin(), modifier = Modifier.fillMaxWidth()
+            makanan  = detailUIState.addEvent.toAdmin(), modifier = Modifier.fillMaxWidth()
         )
 
         OutlinedButton(
@@ -137,7 +137,7 @@ private fun ItemDetailsBody(
 
 @Composable
 fun ItemDetails(
-    admin: Admin, modifier: Modifier = Modifier
+    makanan: Makanan, modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier, colors = CardDefaults.cardColors(
@@ -153,14 +153,21 @@ fun ItemDetails(
         ) {
             ItemDetailsRow(
                 labelResID ="Nama",
-                itemDetail = admin.nama,
+                itemDetail = makanan.namamkn,
                 modifier = Modifier.padding(
                     horizontal = 12.dp
                 )
             )
             ItemDetailsRow(
-                labelResID = "Password",
-                itemDetail = admin.password,
+                labelResID = "Harga",
+                itemDetail = makanan.harga,
+                modifier = Modifier.padding(
+                    horizontal = 12.dp
+                )
+            )
+            ItemDetailsRow(
+                labelResID = "Jenis",
+                itemDetail = makanan.jenis,
                 modifier = Modifier.padding(
                     horizontal = 12.dp
                 )

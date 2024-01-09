@@ -1,6 +1,8 @@
 package com.example.pam.ui
 
-import com.example.pam.Model.Admin
+
+import com.example.pam.Model.Makanan
+
 
 data class AddUIState(
     val addEvent: AddEvent = AddEvent(),
@@ -9,31 +11,35 @@ data class AddUIState(
 data class AddEvent(
     val id: String = "",
     val nama: String = "",
-    val password: String = "",
+    val Harga: String = "",
+    val Jenis: String = "",
 )
 
-fun AddEvent.toAdmin(): Admin = Admin(
+fun AddEvent.toAdmin(): Makanan = Makanan(
     id = id,
-    nama = nama,
-    password = password
+    namamkn = nama,
+    harga = Harga,
+    jenis = Jenis
+
 )
 
 data class DetailUIState(
     val addEvent: AddEvent = AddEvent(),
 )
 
-fun Admin.toDetailAdmin(): AddEvent =
+fun Makanan.toDetailAdmin(): AddEvent =
     AddEvent(
         id = id,
-        nama = nama,
-        password = password
+        nama = namamkn,
+        Harga = harga,
+        Jenis = jenis
     )
 
-fun Admin.toUIStateAdmin(): AddUIState = AddUIState(
+fun Makanan.toUIStateAdmin(): AddUIState = AddUIState(
     addEvent = this.toDetailAdmin()
 )
 
 data class HomeUIState(
-    val listAdmin: List<Admin> = listOf(),
+    val listAdmin: List<Makanan> = listOf(),
     val dataLength: Int = 0
 )

@@ -1,13 +1,7 @@
 package com.example.pam.Model
 
-data class Admin(
-    val id: String,
-    val nama: String,
-    val password: String
-){
-    constructor(): this("","","",)
-}
-data class makanan(
+
+data class Makanan(
     val id: String,
     val namamkn: String,
     val harga: String,
