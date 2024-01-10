@@ -33,6 +33,7 @@ class EditMakananViewModel(
                     .toUIStateAdmin()
         }
     }
+
     fun updateUiState(addEvent: AddEvent ){
         makanUiState = makanUiState.copy(addEvent = addEvent)
     }
