@@ -35,9 +35,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.pam.R
+import com.example.pam.ui.DataPelanggan.DestinasiDataPel
 import com.example.pam.ui.add.DestinasiEntry
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -107,7 +109,7 @@ fun LoginPage(
                     label = { Text(text = "Email")},
                     singleLine = true,
                     leadingIcon = {
-                        IconButton(onClick = { /*TODO*/ }) {
+                        IconButton(onClick = {}) {
                             Icon(
                                 imageVector = Icons.Filled.Email,
                                 contentDescription = "Email Icon")
@@ -119,9 +121,10 @@ fun LoginPage(
                 OutlinedTextField(value = passwordText,
                     onValueChange = {passwordText = it},
                     label = { Text(text = "Password")},
+                    visualTransformation = PasswordVisualTransformation(),
                     singleLine = true,
                     leadingIcon = {
-                        IconButton(onClick = { /*TODO*/ }) {
+                        IconButton(onClick = { }) {
                             Icon(imageVector = Icons.Filled.Lock, contentDescription = "Pass Icon")
                         }
                     },
@@ -134,7 +137,7 @@ fun LoginPage(
                             auth.signInWithEmailAndPassword(emailText, passwordText)
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
-                                        navController.navigate(DestinasiEntry.route)
+                                        navController.navigate(DestinasiDataPel.route)
                                         Toast.makeText(context, "Login success", Toast.LENGTH_SHORT).show()
                                     } else {
                                         Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show()

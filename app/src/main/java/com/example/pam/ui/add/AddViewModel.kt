@@ -22,3 +22,4 @@ class AddViewModel(private val makananRepository: MakananRepository) : ViewModel
         makananRepository.save(addUIState.addEvent.toAdmin())
     }
 }
+

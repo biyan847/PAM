@@ -2,10 +2,12 @@ package com.example.pam.ui
 
 
 import com.example.pam.Model.Makanan
+import com.example.pam.Model.Pelanggan
 
 
 data class AddUIState(
     val addEvent: AddEvent = AddEvent(),
+    val addPelanggan: AddPelanggan = AddPelanggan()
 )
 
 data class AddEvent(
@@ -15,6 +17,12 @@ data class AddEvent(
     val Jenis: String = "",
 )
 
+data class AddPelanggan(
+    val Id: String = "",
+    val plgn: String = "",
+    val Nomormeja : String = "",
+)
+
 fun AddEvent.toAdmin(): Makanan = Makanan(
     id = id,
     namamkn = nama,
@@ -22,9 +30,16 @@ fun AddEvent.toAdmin(): Makanan = Makanan(
     jenis = Jenis
 
 )
+fun AddPelanggan.toPelanggan(): Pelanggan = Pelanggan(
+    id = Id,
+    pelanggan = plgn,
+    nomormeja = Nomormeja,
+
+)
 
 data class DetailUIState(
     val addEvent: AddEvent = AddEvent(),
+    val addPelanggan: AddPelanggan = AddPelanggan()
 )
 
 fun Makanan.toDetailAdmin(): AddEvent =
@@ -34,7 +49,12 @@ fun Makanan.toDetailAdmin(): AddEvent =
         Harga = harga,
         Jenis = jenis
     )
-
+fun Pelanggan.toDetailPelanggan(): AddPelanggan =
+    AddPelanggan(
+        Id = id,
+        plgn = pelanggan,
+        Nomormeja = nomormeja,
+    )
 fun Makanan.toUIStateAdmin(): AddUIState = AddUIState(
     addEvent = this.toDetailAdmin()
 )

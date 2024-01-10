@@ -3,8 +3,10 @@ package com.example.pam.data
 import android.content.ContentValues
 import android.util.Log
 import com.example.pam.Model.Makanan
+import com.example.pam.Model.Pelanggan
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.toObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -22,7 +24,7 @@ interface MakananRepository {
 class MakananRepositoryImpl(private val firestore: FirebaseFirestore) : MakananRepository {
     override fun getAll(): Flow<List<Makanan>> = flow {
         val snapshot = firestore.collection("Makanan")
-            .orderBy("nama", Query.Direction.ASCENDING)
+            .orderBy("namamkn", Query.Direction.ASCENDING)
             .get()
             .await()
         val makanan = snapshot.toObjects(Makanan::class.java)
@@ -58,5 +60,46 @@ class MakananRepositoryImpl(private val firestore: FirebaseFirestore) : MakananR
             emit(makanan!!)
         }.flowOn(Dispatchers.IO)
     }
+
+}
+
+
+interface PelangganRepository {
+    fun getAll(): Flow<List<Pelanggan>>
+    suspend fun save(pelanggan: Pelanggan): String
+    fun getPelangganById(pelangganId: String): Flow<Pelanggan>
+}
+
+class PelangganRepositoryImpl(private val firestore: FirebaseFirestore) : PelangganRepository{
+    override fun getAll(): Flow<List<Pelanggan>> = flow {
+        val snapshot = firestore.collection("Pelanggan")
+            .orderBy("pelanggan", Query.Direction.ASCENDING)
+            .get()
+            .await()
+        val pelanggan = snapshot.toObjects(Pelanggan::class.java)
+        emit(pelanggan)
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun save(pelanggan: Pelanggan): String {
+        return try {
+            val documentReference = firestore.collection("pelanggan")
+                .add(pelanggan)
+                .await()
+            firestore.collection("pelanggan").document(documentReference.id)
+                .set(pelanggan.copy(id = documentReference.id))
+            "Berhasil + ${documentReference.id}"
+        } catch (e: Exception) {
+            Log.w(ContentValues.TAG, "Error adding document", e)
+            "Gagal $e"
+        }
+    }
+    override fun getPelangganById(pelangganId: String): Flow<Pelanggan> {
+        return flow {
+            val snapshot = firestore.collection("Pelanggan").document(pelangganId).get().await()
+            val pelanggan = snapshot.toObject(Pelanggan::class.java)
+            emit(pelanggan!!)
+        }.flowOn(Dispatchers.IO)
+    }
+
 
 }

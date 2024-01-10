@@ -10,8 +10,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.pam.ui.AnimatedSplashScreen
+import com.example.pam.ui.DataPelanggan.DataPel
+import com.example.pam.ui.DataPelanggan.DestinasiDataPel
 import com.example.pam.ui.add.AddScreen
 import com.example.pam.ui.add.DestinasiEntry
+import com.example.pam.ui.detail.DetailDestination
+import com.example.pam.ui.detail.DetailScreen
 
 @Composable
 fun PengelolaHalaman(navController: NavHostController = rememberNavController()) {
@@ -33,6 +37,14 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
         composable(DestinasiEntry.route) {
             AddScreen(navigateBack = {
                 navController.popBackStack()})
+        }
+        composable(DetailDestination.route){
+            DetailScreen(navigateToEditItem = {}, navigateBack = { /*TODO*/ })
+        }
+        composable(DestinasiDataPel.route){
+            DataPel(navigateBack = {
+                navController.popBackStack()
+            })
         }
     }
 }

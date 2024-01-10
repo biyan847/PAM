@@ -3,19 +3,17 @@ package com.example.pam.data
 import com.google.firebase.firestore.FirebaseFirestore
 
 interface AppContainer {
-    val adminRepository: AdminRepository
+    val makananRepository: MakananRepository
     val pelangganRepository : PelangganRepository
-
 }
 
-class AdminContainer : AppContainer{
+class MakananContainer : AppContainer{
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    override val adminRepository: AdminRepository by lazy {
-        AdminRepositoryImpl(firestore)
+    override val makananRepository: MakananRepository by lazy {
+        MakananRepositoryImpl(firestore)
     }
     override val pelangganRepository: PelangganRepository by lazy {
         PelangganRepositoryImpl(firestore)
     }
-
 }

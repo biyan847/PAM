@@ -21,3 +21,11 @@ data class struck(
     constructor(): this("","","","","","",)
 
 }
+data class Pelanggan(
+    val id: String,
+    val pelanggan: String,
+    val nomormeja : String,
+)
+{
+    constructor(): this("","","",)
+}

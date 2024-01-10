@@ -42,7 +42,7 @@ import kotlinx.coroutines.launch
 
 object DetailDestination : DestinasiNavigasi {
     override val route = "item_details"
-    override val titleRes = "Detail Admin"
+    override val titleRes = "Detail Menu"
     const val MakananId = "itemId"
     val routeWithArgs = "$route/{$MakananId}"
 }

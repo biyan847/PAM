@@ -9,7 +9,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -18,8 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pam.Navigation.DestinasiNavigasi
@@ -97,12 +94,7 @@ fun EntryBody(
             onValueChange = onDataValueChange,
             modifier = Modifier.fillMaxWidth()
         )
-        Row (
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.fillMaxWidth()
-                .padding(16.dp)
-                .weight(1f, false),
-        ){
+        Row {
             Button(
                 onClick = onSaveClick,
                 shape = MaterialTheme.shapes.small,
@@ -110,8 +102,11 @@ fun EntryBody(
             ) {
                 Text("Submit")
             }
-            OutlinedButton(modifier = Modifier.weight(1f), onClick =
-            OnNextClick) {
+            Button(
+                onClick = OnNextClick,
+                shape = MaterialTheme.shapes.small,
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Text("Next")
             }
         }
