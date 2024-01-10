@@ -36,7 +36,7 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
         }
         composable(DestinasiEntry.route) {
             AddScreen(navigateBack = {
-                navController.popBackStack()})
+                navController.navigate(Screen.Home.route)})
         }
         composable(DetailDestination.route){
             DetailScreen(navigateToEditItem = {}, navigateBack = { /*TODO*/ })
