@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -16,9 +17,10 @@ import com.example.pam.ui.DataPelanggan.DataPel
 import com.example.pam.ui.DataPelanggan.DestinasiDataPel
 import com.example.pam.ui.add.AddScreen
 import com.example.pam.ui.add.DestinasiEntry
-import com.example.pam.ui.detail.DetailDestination
+import com.example.pam.ui.detail.DetailDestinationScreen
 import com.example.pam.ui.detail.DetailScreen
 import com.example.pam.ui.edit.EditMakanan
+import com.example.pam.ui.edit.EditMakananScreen
 
 @Composable
 fun PengelolaHalaman(navController: NavHostController = rememberNavController()) {
@@ -41,21 +43,22 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
             AddScreen(navigateBack = {
                 navController.navigate(Screen.Home.route)})
         }
-        composable(DetailDestination.route){
+        composable(DetailDestinationScreen.route){
             DetailScreen(navigateToEditItem = {}, navigateBack = { /*TODO*/ })
         }
         composable(DestinasiDataPel.route){
-            DataPel(navigateBack = {
-                navController.popBackStack()
-            })
+            DataPel(
+                navigateBack = {navController.navigate("LoginPage")},
+                navigateNext = {navController.navigate((DetailDestinationScreen.route))}
+            )
         }
         composable(
-            route = EditMakanan.routeWithArgs,
-            arguments = listOf(navArgument(EditMakanan.makananId){
+            route = EditMakananScreen.routeWithArgs,
+            arguments = listOf(navArgument(EditMakananScreen.makananId){
                 type = NavType.StringType
             })
         ){backStackEntry ->
-            val makananId = backStackEntry.arguments?.getString(EditMakanan.makananId)
+            val makananId = backStackEntry.arguments?.getString(EditMakananScreen.makananId)
             makananId?.let {
                 EditMakanan(
                     navigateBack = { navController.popBackStack()},
@@ -64,3 +67,4 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
         }
     }
 }
+

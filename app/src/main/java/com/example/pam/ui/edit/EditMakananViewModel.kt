@@ -22,7 +22,7 @@ class EditMakananViewModel(
     var makanUiState by mutableStateOf(AddUIState())
         private set
 
-    private  val makananId: String = checkNotNull(savedStateHandle[EditMakanan.makananId])
+    private  val makananId: String = checkNotNull(savedStateHandle[EditMakananScreen.makananId])
 
     init {
         viewModelScope.launch {

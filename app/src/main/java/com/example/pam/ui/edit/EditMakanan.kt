@@ -16,11 +16,11 @@ import com.example.pam.ui.PenyediaViewModel
 import com.example.pam.ui.add.EntryBody
 import kotlinx.coroutines.launch
 
-object EditMakanan : DestinasiNavigasi {
+object EditMakananScreen : DestinasiNavigasi {
     override val route = "item_edit"
     override val titleRes ="Edit Makanan"
     const val makananId= "itemId"
-    val routeWithArgs = "${EditMakanan.route}/{$makananId}"
+    val routeWithArgs = "${EditMakananScreen.route}/{$makananId}"
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,7 +35,7 @@ fun EditMakanan(
         topBar = {
 
                 AddMenuTopAppBar(
-                    title = EditMakanan.titleRes,
+                    title = EditMakananScreen.titleRes,
                     canNavigateBack = true,
                     navigateUp = onNavigateUp
                 )
@@ -49,7 +49,6 @@ fun EditMakanan(
                 coroutineScope.launch {
                     viewModel.updatemakanan()
                 }
-
             },
             OnNextClick = {
                 navigateBack()

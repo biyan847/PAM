@@ -40,7 +40,7 @@ import com.example.pam.ui.AddMenuTopAppBar
 import com.example.pam.ui.toAdmin
 import kotlinx.coroutines.launch
 
-object DetailDestination : DestinasiNavigasi {
+object DetailDestinationScreen : DestinasiNavigasi {
     override val route = "item_details"
     override val titleRes = "Detail Menu"
     const val MakananId = "itemId"
@@ -61,7 +61,7 @@ fun DetailScreen(
     Scaffold(
         topBar = {
             AddMenuTopAppBar(
-                title = DetailDestination.titleRes,
+                title = DetailDestinationScreen.titleRes,
                 canNavigateBack = true,
                 navigateUp = navigateBack
             )

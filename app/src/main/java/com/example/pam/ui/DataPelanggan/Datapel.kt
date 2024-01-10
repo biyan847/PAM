@@ -38,13 +38,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.pam.Navigation.DestinasiNavigasi
 import com.example.pam.R
-import com.example.pam.ui.AddDatapelanggan
+import com.example.pam.ui.AddMenuTopAppBar
 import com.example.pam.ui.AddPelanggan
 import com.example.pam.ui.AddUIState
 import com.example.pam.ui.PenyediaViewModel
-import com.example.pam.ui.add.FormInput
+import com.example.pam.ui.add.DestinasiEntry
+import com.example.pam.ui.detail.DetailDestination
+import com.example.pam.ui.edit.EditMakananScreen
+import com.example.pam.ui.theme.PAMTheme
 import kotlinx.coroutines.launch
 
 
@@ -55,6 +59,7 @@ object DestinasiDataPel : DestinasiNavigasi{
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DataPel(
+    navigateNext: () -> Unit,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     detailDatapelViewModel: DetailDatapelViewModel = viewModel(factory = PenyediaViewModel.comsumen)
@@ -64,15 +69,12 @@ fun DataPel(
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            AddDatapelanggan(
+            AddMenuTopAppBar(
                 title = DestinasiDataPel.titleRes,
-                canNavigateBack =true,
+                canNavigateBack = true,
                 scrollBehavior = scrollBehavior,
-                navigateUp = navigateBack
-
-            )
+                navigateUp = navigateBack )
         }
-
     ) { innerPadding ->
         Entri(
             addUIState = detailDatapelViewModel.AddUIState,
@@ -81,8 +83,8 @@ fun DataPel(
                 detailDatapelViewModel.addpelanggan()
                 }
             },
-            OnNextClick = {
-                navigateBack()
+            navigateNext = {
+                navigateNext()
             },
             modifier = Modifier
                 .padding(innerPadding)
@@ -126,7 +128,7 @@ fun Entri(
     onDataValueChange: (AddPelanggan) -> Unit,
     modifier: Modifier = Modifier,
     onSaveClick: () -> Unit,
-    OnNextClick: () -> Unit,
+    navigateNext: () -> Unit,
     detailDatapelViewModel: DetailDatapelViewModel = viewModel(factory = PenyediaViewModel.comsumen)
 ){
     val coroutineScope = rememberCoroutineScope()
@@ -143,12 +145,12 @@ fun Entri(
                 }
             },
             OnNextClick = {
-                OnNextClick
+                navigateNext()
             },
         )
-
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UiInput(
@@ -207,26 +209,41 @@ fun UiInput(
                     enabled = enabled,
                     shape = RoundedCornerShape(20.dp),
                 )
-                Row (
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                Column (
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)
                         .weight(1f, false),
                 ){
-                    Button(
-                        onClick = onSaveClick,
-                        shape = MaterialTheme.shapes.small,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text("Submit")
+                    Row (
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        verticalAlignment = Alignment.Bottom,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                    ){
+                        Button(
+                            onClick = onSaveClick,
+                            shape = MaterialTheme.shapes.small,
+                        ) {
+                            Text("Submit")
+                        }
+                        OutlinedButton(modifier = Modifier.weight(1f), onClick =
+                        OnNextClick) {
+                            Text("Next")
+                        }
                     }
-                    OutlinedButton(modifier = Modifier.weight(1f), onClick =
-                    OnNextClick) {
-                        Text("Next")
-                    }
+
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ApadehPreview() {
+    PAMTheme {
+
     }
 }
