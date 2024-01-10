@@ -21,7 +21,7 @@ class DetailViewModel(
         private const val TIMEOUT_MILLIS = 5_000L
     }
 
-    val makananId: String = checkNotNull(savedStateHandle[DetailDestination.MakananId])
+    val makananId: String = checkNotNull(savedStateHandle[DetailDestinationScreen.MakananId])
 
     val uiState: StateFlow<DetailUIState> =
         repository.getMakananById(makananId)

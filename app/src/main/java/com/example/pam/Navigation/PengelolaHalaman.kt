@@ -21,6 +21,8 @@ import com.example.pam.ui.detail.DetailDestinationScreen
 import com.example.pam.ui.detail.DetailScreen
 import com.example.pam.ui.edit.EditMakanan
 import com.example.pam.ui.edit.EditMakananScreen
+import com.example.pam.ui.menu.MenuScreen
+import com.example.pam.ui.menu.TampilScreenMenu
 
 @Composable
 fun PengelolaHalaman(navController: NavHostController = rememberNavController()) {
@@ -43,13 +45,26 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
             AddScreen(navigateBack = {
                 navController.navigate(Screen.Home.route)})
         }
-        composable(DetailDestinationScreen.route){
-            DetailScreen(navigateToEditItem = {}, navigateBack = { /*TODO*/ })
+        composable(route = DetailDestinationScreen.routeWithArgs,
+            arguments = listOf(navArgument(DetailDestinationScreen.MakananId) {
+                type = NavType.StringType
+            })
+        ) { backStackEntry ->
+            val makananId = backStackEntry.arguments?.getString(DetailDestinationScreen.MakananId)
+            makananId?.let {
+                DetailScreen(
+                    navigateBack = { navController.popBackStack() },
+                    navigateToEditItem = {
+                        navController.navigate("${EditMakananScreen.route}/$makananId")
+                        println("makananId: $makananId")
+                    }
+                )
+            }
         }
         composable(DestinasiDataPel.route){
             DataPel(
                 navigateBack = {navController.navigate("LoginPage")},
-                navigateNext = {navController.navigate((DetailDestinationScreen.route))}
+                navigateNext = {navController.navigate((TampilScreenMenu.route))}
             )
         }
         composable(
@@ -64,6 +79,17 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
                     navigateBack = { navController.popBackStack()},
                     onNavigateUp = {navController.navigateUp() })
             }
+        }
+        composable(
+            TampilScreenMenu.route
+        ) {
+            MenuScreen(navigateToItemEntry = {
+                navController.navigate(DestinasiEntry.route)
+            },
+                onDetailClick = { itemId ->
+                    navController.navigate("${DetailDestinationScreen.route}/$itemId")
+                    println("itemId: $itemId")
+                })
         }
     }
 }

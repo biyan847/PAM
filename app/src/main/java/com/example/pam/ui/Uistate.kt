@@ -59,7 +59,7 @@ fun Makanan.toUIStateAdmin(): AddUIState = AddUIState(
     addEvent = this.toDetailAdmin()
 )
 
-data class HomeUIState(
-    val listAdmin: List<Makanan> = listOf(),
+data class MakananUIState(
+    val listMakanan: List<Makanan> = listOf(),
     val dataLength: Int = 0
 )
