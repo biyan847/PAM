@@ -6,9 +6,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.pam.ui.AnimatedSplashScreen
 import com.example.pam.ui.DataPelanggan.DataPel
 import com.example.pam.ui.DataPelanggan.DestinasiDataPel
@@ -16,6 +18,7 @@ import com.example.pam.ui.add.AddScreen
 import com.example.pam.ui.add.DestinasiEntry
 import com.example.pam.ui.detail.DetailDestination
 import com.example.pam.ui.detail.DetailScreen
+import com.example.pam.ui.edit.EditMakanan
 
 @Composable
 fun PengelolaHalaman(navController: NavHostController = rememberNavController()) {
@@ -45,6 +48,19 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
             DataPel(navigateBack = {
                 navController.popBackStack()
             })
+        }
+        composable(
+            route = EditMakanan.routeWithArgs,
+            arguments = listOf(navArgument(EditMakanan.makananId){
+                type = NavType.StringType
+            })
+        ){backStackEntry ->
+            val makananId = backStackEntry.arguments?.getString(EditMakanan.makananId)
+            makananId?.let {
+                EditMakanan(
+                    navigateBack = { navController.popBackStack()},
+                    onNavigateUp = {navController.navigateUp() })
+            }
         }
     }
 }

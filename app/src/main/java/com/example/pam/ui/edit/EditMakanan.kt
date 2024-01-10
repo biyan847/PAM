@@ -33,30 +33,31 @@ fun EditMakanan(
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
         topBar = {
-            (
+
                 AddMenuTopAppBar(
                     title = EditMakanan.titleRes,
                     canNavigateBack = true,
-                    navigateUp = onNavigateUp)
-            )
+                    navigateUp = onNavigateUp
+                )
         },
         modifier = modifier
-    ) {innerPadding -> EntryBody(
-        addUIState = viewModel.makanUiState,
-        onDataValueChange = viewModel::updateUiState,
-        onSaveClick = {
-                      coroutineScope.launch{
-                          viewModel.updatemakanan()
-                      }
-        },
-        OnNextClick = {
-            navigateBack()
-        },
-        modifier = Modifier
-            .padding(innerPadding)
-            .verticalScroll(rememberScrollState())
-            .fillMaxWidth()
-        )
+    ) { innerPadding ->
+        EntryBody(
+            addUIState = viewModel.makanUiState,
+            onDataValueChange = viewModel::updateUiState,
+            onSaveClick = {
+                coroutineScope.launch {
+                    viewModel.updatemakanan()
+                }
 
+            },
+            OnNextClick = {
+                navigateBack()
+            },
+            modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
+                .fillMaxWidth()
+        )
     }
 }
