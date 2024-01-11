@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Card
@@ -19,6 +20,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LeadingIconTab
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -97,7 +100,7 @@ fun BodyHome(
     ) {
         if (itemMakanan.isEmpty()) {
             Text(
-                text = "Tidak ada data Kontak",
+                text = "Tidak ada data Makanan",
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleLarge
             )
@@ -122,7 +125,7 @@ fun ListMakanan(
         modifier = modifier
     ) {
         this.items(itemMakanan, key = { it.id }) { makanan ->
-            DataKontak(
+            DataMakan(
                 makanan = makanan,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -134,7 +137,7 @@ fun ListMakanan(
 }
 
 @Composable
-fun DataKontak(
+fun DataMakan(
     makanan: Makanan,
     modifier: Modifier = Modifier
 ) {
@@ -149,6 +152,7 @@ fun DataKontak(
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
+
                 Text(
                     text = makanan.namamkn,
                     style = MaterialTheme.typography.titleLarge,

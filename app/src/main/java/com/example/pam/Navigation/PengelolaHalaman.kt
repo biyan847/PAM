@@ -42,8 +42,8 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
             Box(modifier = Modifier.fillMaxSize())
         }
         composable(DestinasiEntry.route) {
-            AddScreen(navigateBack = {
-                navController.navigate(Screen.Home.route)})
+            AddScreen(navigateBack = {navController.popBackStack()},
+                OnNextClick = {navController.navigate(Screen.Home.route)})
         }
         composable(route = DetailDestinationScreen.routeWithArgs,
             arguments = listOf(navArgument(DetailDestinationScreen.MakananId) {

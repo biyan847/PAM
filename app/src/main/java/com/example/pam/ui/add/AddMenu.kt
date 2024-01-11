@@ -46,6 +46,7 @@ object DestinasiEntry : DestinasiNavigasi {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddScreen(
+    OnNextClick: () -> Unit,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     addViewModel: AddViewModel = viewModel(factory = PenyediaViewModel.Factory),
@@ -76,7 +77,7 @@ fun AddScreen(
                 }
             },
             OnNextClick = {
-                navigateBack()
+                OnNextClick()
             },
             modifier = Modifier
                 .padding(innerPadding)
@@ -122,7 +123,6 @@ fun EntryBody(
             }
             OutlinedButton(modifier = Modifier.weight(1f), onClick = {
                 OnNextClick()
-                isDataSaved = false
             }
             ) {
                 Text("Next")
