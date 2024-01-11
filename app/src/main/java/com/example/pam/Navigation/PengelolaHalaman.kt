@@ -21,7 +21,9 @@ import com.example.pam.ui.detail.DetailDestinationScreen
 import com.example.pam.ui.detail.DetailScreen
 import com.example.pam.ui.edit.EditMakanan
 import com.example.pam.ui.edit.EditMakananScreen
+import com.example.pam.ui.menu.DetailPaymentScreen
 import com.example.pam.ui.menu.MenuScreen
+import com.example.pam.ui.menu.PaymentScreen
 import com.example.pam.ui.menu.TampilScreenMenu
 
 @Composable
@@ -89,7 +91,23 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
                 onDetailClick = { itemId ->
                     navController.navigate("${DetailDestinationScreen.route}/$itemId")
                     println("itemId: $itemId")
-                })
+                },
+                onPaymentClick = {
+                    itemId -> navController.navigate("${DetailPaymentScreen.route}/$itemId")
+                }
+            )
+        }
+        composable(route = DetailPaymentScreen.routeWithArgs,
+            arguments = listOf(navArgument(DetailPaymentScreen.MakananId) {
+                type = NavType.StringType
+            })
+        ) { backStackEntry ->
+            val makananId = backStackEntry.arguments?.getString(DetailPaymentScreen.MakananId)
+            makananId?.let {
+                PaymentScreen(
+                    navigateBack = { navController.popBackStack() },
+                )
+            }
         }
     }
 }

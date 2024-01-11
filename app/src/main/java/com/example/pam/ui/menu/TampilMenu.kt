@@ -12,19 +12,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.LeadingIconTab
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -40,6 +37,7 @@ import com.example.pam.Navigation.DestinasiNavigasi
 import com.example.pam.ui.AddMenuTopAppBar
 import com.example.pam.ui.PenyediaViewModel
 
+
 object TampilScreenMenu : DestinasiNavigasi {
     override val route = "home"
     override val titleRes = "Kontak"
@@ -50,6 +48,7 @@ object TampilScreenMenu : DestinasiNavigasi {
 fun MenuScreen(
     navigateToItemEntry: () -> Unit,
     modifier: Modifier = Modifier,
+    onPaymentClick: (String) -> Unit = {},
     onDetailClick: (String) -> Unit = {},
     viewModel: MenuViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
@@ -83,7 +82,8 @@ fun MenuScreen(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize(),
-            onViewClick = onDetailClick
+            onViewClick = onDetailClick,
+            onOrderClick = onPaymentClick
         )
     }
 }
@@ -92,6 +92,7 @@ fun MenuScreen(
 fun BodyHome(
     itemMakanan: List<Makanan>,
     modifier: Modifier = Modifier,
+    onOrderClick: (String) -> Unit = {},
     onViewClick: (String) -> Unit = {}
 ) {
     Column(
@@ -107,9 +108,9 @@ fun BodyHome(
         } else {
             ListMakanan(
                 itemMakanan= itemMakanan,
-                modifier = Modifier
-                    .padding(horizontal = 8.dp),
-                onItemClick = { onViewClick(it.id) }
+                modifier = Modifier,
+                onItemClick = {onViewClick(it.id)},
+                onOrderClick = {onOrderClick(it.id)}
             )
         }
     }
@@ -119,7 +120,8 @@ fun BodyHome(
 fun ListMakanan(
     itemMakanan: List<Makanan>,
     modifier: Modifier = Modifier,
-    onItemClick: (Makanan) -> Unit
+    onItemClick: (Makanan) -> Unit,
+    onOrderClick: (Makanan) -> Unit // Tambahkan parameter ini
 ) {
     LazyColumn(
         modifier = modifier
@@ -131,7 +133,9 @@ fun ListMakanan(
                     .fillMaxWidth()
                     .clickable { onItemClick(makanan) }
             )
-            Spacer(modifier = Modifier.padding(8.dp))
+            TextButton(onClick = { onOrderClick(makanan) }) { // Tambahkan fungsi untuk tombol order
+                Text(text = "Order")
+            }
         }
     }
 }

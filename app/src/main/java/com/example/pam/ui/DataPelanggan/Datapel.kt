@@ -221,12 +221,12 @@ fun UiInput(
                         ) {
                             Text("Submit")
                         }
-                        OutlinedButton(modifier = Modifier.weight(1f), onClick =
+                        OutlinedButton(
+                            modifier = Modifier.weight(1f), onClick =
                         OnNextClick) {
                             Text("Next")
                         }
                     }
-
                 }
             }
         }
